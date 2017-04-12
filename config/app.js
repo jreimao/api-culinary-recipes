@@ -43,7 +43,10 @@ app.listen(app.get('port'));
 // add  middleware function
 app.use(bodyParser.urlencoded({extended: true}));
 
-
+// bodyParser converte os dados em json - gravar e actualizar
+// assim o 'express' utiliza 'bodyParser'
+// bodyParser converts data to json - write and update
+// so the 'express' uses 'bodyParser'
 app.use(bodyParser.json());
 
 
