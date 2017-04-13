@@ -5,7 +5,7 @@ var app = require('./config/app');
 
 // importar config/db
 // import config/db
-var db = require('./config/db');
+const db = require('./config/db');
 
 
 
@@ -23,7 +23,7 @@ app.get('/api-culinary-recipes', function(req, res) {
 // route definition '/api-culinary-recipes/v1'
 app.get('/api-culinary-recipes/v1', function(req, res){
 
-    // após aceder a rota devolve uma mensagem com o nome api e versão
-    // return message with name api and version
+    //após aceder a rota devolve uma mensagem com o nome api e versão
+    //return message with name api and version
     res.end(`Bem-vindo a API ${app.get('name-api')} versao ${app.get('versao-api')}`);
 });

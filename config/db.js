@@ -1,19 +1,24 @@
 
 // importar framework mongoose
 // import mongoose framework
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
+
+// utilizar biblioteca 'Promise' do nodeJs (v6) e não a do mongoose
+mongoose.Promise = Promise;
 
 // endereço e nome bd (base de dados)
 // url and name db
-var urlNameBD = 'mongodb://localhost/db-culinary-recipes';
+// no caso de nao existir variavel ambiente (padrao), utiliza localhost/...
+const urlNameBD = process.env.MONGODB_URL || 'mongodb://localhost/db-culinary-recipes';
+
 
 // ligação a bd e erros
 // link to db and bugs
-mongoose.connect(urlNameBD, function(err, res) {
+let connect = mongoose.connect(urlNameBD, (err, res) => {
 
     if (err) {
         
-        //console.log(err);
+        console.log(err);
         console.log('it is not possible to connect to ' + urlNameBD);
 
     } else {
@@ -23,3 +28,7 @@ mongoose.connect(urlNameBD, function(err, res) {
     }
 
 });
+
+
+// exportar modulo configuração bd
+module.exports = connect;
