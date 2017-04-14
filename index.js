@@ -11,10 +11,17 @@ const db = require('./config/db');
 // import controllers/recipeController
 var recipeController = require('./controllers/recipeController');
 
+// importar controllers/userController
+// import controllers/userController
+var userController = require('./controllers/userController');
+
 // importar routes/recipeRouter
 // import routes/recipeRouter
 var recipeRouter = require('./routes/recipeRouter');
 
+// importar routes/userRouter
+// import routes/userRouter
+var userRouter = require('./routes/userRouter');
 
 
 
@@ -41,3 +48,7 @@ app.get('/api-culinary-recipes/v1', function(req, res){
 // defenição rota '/api-culinary-recipes/v1/recipe'
 // route definition '/api-culinary-recipes/v1/recipe'
 app.use('/api-culinary-recipes/v1/recipe', recipeRouter);
+
+// defenição rota 'api-culinary-recipes/v1/user'
+// route definition 'api-culinary-recipes/v1/user'
+app.use('/api-culinary-recipes/v1/user', userRouter);
