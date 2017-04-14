@@ -7,6 +7,15 @@ var app = require('./config/app');
 // import config/db
 const db = require('./config/db');
 
+// importar controllers/recipeController
+// import controllers/recipeController
+var recipeController = require('./controllers/recipeController');
+
+// importar routes/recipeRouter
+// import routes/recipeRouter
+var recipeRouter = require('./routes/recipeRouter');
+
+
 
 
 // direcciona para .../api-culinary-recipes/v1
@@ -27,3 +36,8 @@ app.get('/api-culinary-recipes/v1', function(req, res){
     //return message with name api and version
     res.end(`Bem-vindo a API ${app.get('name-api')} versao ${app.get('versao-api')}`);
 });
+
+
+// defenição rota '/api-culinary-recipes/v1/recipe'
+// route definition '/api-culinary-recipes/v1/recipe'
+app.use('/api-culinary-recipes/v1/recipe', recipeRouter);
