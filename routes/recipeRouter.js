@@ -1,4 +1,3 @@
-
 // importa express
 // import express
 var express = require('express');
@@ -15,13 +14,11 @@ var recipeController = require('../controllers/recipeController');
 
 // rota pesquisa receitas - GET
 // route search recipes - GET
+// .get()  ->  metodo framework express
 router.get('/', (req, res) => {
     
-    recipeController.list((resp) => {
-
-        res.json(resp);
-        
-    })
+    // chama metodo recipeList do recipeController
+    recipeController.recipesList(req, res);
 
 });
 
@@ -30,13 +27,8 @@ router.get('/', (req, res) => {
 // route search recipe by id - GET
 router.get('/:id', (req, res) => {
 
-    var id = req.params.id;
-
-    recipeController.listId(id, (resp) => {
-
-        res.json(resp);
-
-    });
+    // chama metodo recipeId do recipeController
+    recipeController.recipeId(req, res);
 
 })
 
@@ -45,11 +37,8 @@ router.get('/:id', (req, res) => {
 // route insert recipe - POST
 router.post('/', (req, res) => {
 
-    recipeController.insert(req, (resp) => {
-
-        res.json(resp);
-
-    })
+    // chama metodo insert do recipeController
+    recipeController.insert(req, res);
 
 })
 
@@ -58,12 +47,8 @@ router.post('/', (req, res) => {
 // route update recipe - PUT
 router.put('/:id', (req, res) => {
 
-    var id = req.params.id;
-
-    recipeController.update(id, req, (resp) => {
-
-        res.json(resp);
-    });
+    // chama metodo update do recipeController
+    recipeController.update(req, res);
 
 })
 
@@ -72,12 +57,8 @@ router.put('/:id', (req, res) => {
 // route delete recipe - DELETE
 router.delete('/:id', (req, res) => {
 
-    var id = req.params.id;
-
-    recipeController.delete(id, (resp) => {
-
-        res.json(resp);
-    })
+    // chama metodo delete do recipeController
+    recipeController.delete(req, res);
 
 })
 
