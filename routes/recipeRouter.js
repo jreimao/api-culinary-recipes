@@ -10,14 +10,37 @@ var router = express.Router();
 // import '../controllers/recipeController'
 var recipeController = require('../controllers/recipeController');
 
+// importa '../controllers/userController'
+// import '../controllers/userController'
+var userController = require('../controllers/userController');
+
+
+// metodo recolhe token requisição (confirmar usuario autenticado)
+// method gets token request
+function getToken(req, res, next) {
+
+    var header = req.headers['authorization'];
+
+    if (typeof header !== 'undefined') {
+
+        res.token = header;
+        next();
+
+    } else {
+
+        // 403 - forbidden
+        //res.sendStatus(403).send(403);
+        res.sendStatus(403);
+
+    }
+
+}
 
 
 // rota pesquisa receitas - GET
 // route search recipes - GET
-// .get()  ->  metodo framework express
 router.get('/', (req, res) => {
-    
-    // chama metodo recipeList do recipeController
+
     recipeController.recipesList(req, res);
 
 });
@@ -27,38 +50,93 @@ router.get('/', (req, res) => {
 // route search recipe by id - GET
 router.get('/:id', (req, res) => {
 
-    // chama metodo recipeId do recipeController
     recipeController.recipeId(req, res);
 
 })
 
 
+
 // rota inserir receita - POST
 // route insert recipe - POST
-router.post('/', (req, res) => {
+router.post('/', getToken, (req, res) => {
 
-    // chama metodo insert do recipeController
-    recipeController.insert(req, res);
+    var token = res.token;
+
+    // confirma se token pertence a algum usuario
+    // confirm if token belongs to any user
+    userController.authorize(token, (resp) => {
+
+        if (resp === true) {
+
+            recipeController.insert(req, res);
+
+        } else {
+
+            res.sendStatus(403);
+
+        }
+
+    });
 
 })
+
 
 
 // rota actualizar receita - PUT
 // route update recipe - PUT
-router.put('/:id', (req, res) => {
+router.put('/:id', getToken, (req, res) => {
 
-    // chama metodo update do recipeController
-    recipeController.update(req, res);
+    var token = res.token;
+
+    // confirma se token pertence a algum usuario
+    // confirm if token belongs to any user
+    userController.authorize(token, (resp) => {
+
+        if (resp === true) {
+
+            // confirmado usuario com este token
+            // chama metodo update do recipeController
+            recipeController.update(req, res);
+
+        } else {
+
+            // nao existe usuario com este token
+            // devolve 403 - proibido
+            res.sendStatus(403);
+
+        }
+
+    });
 
 })
 
 
+
 // rota eliminar receita - DELETE
 // route delete recipe - DELETE
-router.delete('/:id', (req, res) => {
+router.delete('/:id', getToken, (req, res) => {
 
-    // chama metodo delete do recipeController
-    recipeController.delete(req, res);
+    var token = res.token;
+
+    // confirma se token pertence a algum usuario
+    // confirm if token belongs to any user
+    userController.authorize(token, (resp) => {
+
+        if (resp === true) {
+
+            // confirmado usuario com este token
+            // chama metodo delete do recipeController
+            recipeController.delete(req, res);
+
+        } else {
+
+            // nao existe usuario com este token
+            // devolve 403 - proibido
+            res.sendStatus(403);
+
+        }
+
+    });
 
 })
 

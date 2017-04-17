@@ -5,47 +5,133 @@ var User = require('../models/user');
 
 
 
-// metodo para pesquisar por id
-// method for searching by id
-exports.userId = (req, res) => {
+// metodo proteger rotas com autenticação (token)
+// method to protect routes with authentication
+exports.authorize = (token, resp) => {
 
-    User.findById({_id: req.params.id}, (error, user) => {
+    User.findOne({'token': token}, (error, user) => {
 
         if (error) {
 
-            res.status(400).send(error.message);
+            resp(false);
+
+        } else if (user) {
+
+            resp(true);
 
         } else {
 
+            resp(false);
+
+        }
+
+
+    });
+
+}
+
+
+
+exports.userData = (req, res) => {
+
+    User.findOne({'token': req.token}, (error, user) => {
+
+        //
+        if (error) {
+
+            //res.status(000).send(error.message);
+            res.send(error.message);
+
+        } else if (user) {
+
             res.send(user);
+
+        } else {
+
+            res.send('user does not exist');
+
         }
 
     })
 }
 
 
-// metodo para inserir usuario
-// method to insert user
+
 exports.insert = (req, res) => {
 
-    const user = new User(req.body);
-
-    user.save((error, user) => {
+    User.findOne({'name': req.body.name}, (error, user) => {
 
         if (error) {
 
             res.status(412).send(error.message);
-            
+
+        } else if (user) {
+
+            res.send('a user with that name already exists');
 
         } else {
 
-            res.status(201).send(user);
+            let user = new User();
+
+            user.name = req.body.name;
+            user.password = user.encryptPass(req.body.password);
+            user.token = user.createToken(req.body.name, req.body.password);
             
+            user.save((error, user) => {
+
+                if (error) {
+
+                    res.status(412).send(error.message);
+                    
+
+                } else {
+
+                    res.status(201).send(user);
+                    
+
+                }
+
+            });
+
 
         }
 
-    });
+    })
 
+}
+
+
+
+// metodo autenticar usuario
+// method user authentication
+exports.auth = (req, res) => {
+
+    User.findOne({'name': req.body.name}, (error, user) => {
+
+        if (error) {
+
+            res.send(error.message);
+
+        } else if (user) {
+
+            if (user.validatePass(req.body.password, user.password)) {
+
+                res.send(user.token);
+
+            } else {
+
+                res.send('wrong password');
+
+            }
+
+        } else {
+
+            res.send('user does not exist');
+
+        }
+
+    })
+    
 }
 
 
@@ -66,5 +152,27 @@ exports.update = (req, res) => {
 
         }
 
+    })
+}
+
+
+
+// metodo para eliminar usuario
+// method to delete user
+exports.delete = (req, res) => {
+
+    var id = req.params.id;
+
+    User.remove({_id: req.params.id}, (error, user) => {
+
+        if (error) {
+
+            res.status(400).send(error.message);
+
+        } else {
+
+            res.sendStatus(204);
+
+        }
     })
 }

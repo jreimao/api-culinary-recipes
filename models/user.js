@@ -6,10 +6,18 @@
 // import mongoose framework
 var mongoose = require('mongoose');
 
+
 // classe Schema, instruções para criar 'colecção'
 // class Schema, instructions to create 'collection'
 var Schema = mongoose.Schema;
 
+// framework 'bcrypt'
+// encriptar senha
+var bcrypt = require('bcrypt');
+
+// framework 'jsonwebtoken'
+// criar token
+var jwt = require('jsonwebtoken');
 
 
 // modelo 'usuario' para criar 'colecção' - objecto tipo Schema
@@ -18,9 +26,44 @@ var UserSchema = new Schema({
 
     name:       String,
     email:      String,
-    password:   String
+    password:   String,
+    token:      String
 
 });
+
+
+
+// metodo encriptar senha
+// nethod to encrypt password
+UserSchema.methods.encryptPass = (password) => {
+
+    return bcrypt.hashSync(password, bcrypt.genSaltSync(9));
+
+}
+
+
+// metodo validar senha
+// method validate password
+UserSchema.methods.validatePass = (young, old) => {
+
+    // devolve 'verdaeiro' ou 'falso'
+    // return 'true/false'
+    return bcrypt.compareSync(young, old);
+
+}
+
+
+// metodo gerar token
+// method to create token
+UserSchema.methods.createToken = (name, password) => {
+
+    // devolve token
+    // return token
+    // 'secret'  ->  string - token
+    return jwt.sign({'name': name, 'password': password}, 'secret');
+
+}
+
 
 
 // exporta module ...; permite ser importado em outros locais
