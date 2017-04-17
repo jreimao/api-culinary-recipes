@@ -5,8 +5,13 @@ var Recipe = require('../models/recipe');
 
 
 
+// metodo para listar todas as receitas - GET
+// method to list all recipes - GET
 exports.recipesList = (req, res) => {
 
+    // pesquisa especifica - duração: 15 minutos ou ...
+    // specific search - duration: 15 minutes
+    // recipe.find({duration: '15'}, function(error, recipes){ ...
     Recipe.find({}, (error, recipes) => {
 
         if (error) {
@@ -55,11 +60,12 @@ exports.recipeId = (req, res) => {
 }
 
 
-
+// metodo para inserir receita
+// method to insert recipe
 exports.insert = (req, res) => {
 
     const recipe = new Recipe(req.body);
-    
+
     recipe.save((error, recipe) => {
 
         if (error) {
@@ -96,6 +102,7 @@ exports.update = (req, res) => {
             // devolve status 200 - OK
             // return status 200 - OK
             res.send(req.body);
+            //res.status(200).send(recipe.id);
 
         }
 
@@ -109,19 +116,14 @@ exports.delete = (req, res) => {
 
     var id = req.params.id;
 
-    Recipe.remove((error, recipe) => {
+    Recipe.remove({_id: req.params.id}, (error, recipe) => {
 
         if (error) {
 
-            //callback({error: 'não foi possivel excluir'});
-            //callback(400);
             res.status(400).send(error.message);
 
         } else {
 
-            // devolve status 204 - OK
-            // return status 204 - OK
-            //res.status(204);
             res.status(204).send(id);
 
         }

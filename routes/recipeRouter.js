@@ -1,3 +1,4 @@
+
 // importa express
 // import express
 var express = require('express');
@@ -15,6 +16,7 @@ var recipeController = require('../controllers/recipeController');
 var userController = require('../controllers/userController');
 
 
+
 // metodo recolhe token requisição (confirmar usuario autenticado)
 // method gets token request
 function getToken(req, res, next) {
@@ -22,7 +24,7 @@ function getToken(req, res, next) {
     var header = req.headers['authorization'];
 
     if (typeof header !== 'undefined') {
-
+ 
         res.token = header;
         next();
 
@@ -94,14 +96,10 @@ router.put('/:id', getToken, (req, res) => {
 
         if (resp === true) {
 
-            // confirmado usuario com este token
-            // chama metodo update do recipeController
             recipeController.update(req, res);
 
         } else {
 
-            // nao existe usuario com este token
-            // devolve 403 - proibido
             res.sendStatus(403);
 
         }
@@ -116,6 +114,7 @@ router.put('/:id', getToken, (req, res) => {
 // route delete recipe - DELETE
 router.delete('/:id', getToken, (req, res) => {
 
+    // recebe o token lido 'header' requisição
     var token = res.token;
 
     // confirma se token pertence a algum usuario
@@ -124,14 +123,10 @@ router.delete('/:id', getToken, (req, res) => {
 
         if (resp === true) {
 
-            // confirmado usuario com este token
-            // chama metodo delete do recipeController
             recipeController.delete(req, res);
 
         } else {
 
-            // nao existe usuario com este token
-            // devolve 403 - proibido
             res.sendStatus(403);
 
         }
@@ -142,5 +137,4 @@ router.delete('/:id', getToken, (req, res) => {
 
 
 
-// exporta module 'router' permite ser importado e utilizado noutros locais
 module.exports = router;

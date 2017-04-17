@@ -26,8 +26,6 @@ function getToken(req, res, next) {
 
     } else {
 
-        // 403 - forbidden
-        //res.sendStatus(403).send(403);
         res.sendStatus(403);
 
     }
@@ -36,6 +34,8 @@ function getToken(req, res, next) {
 
 
 
+// rota autenticação usuario
+// 
 router.post('/auth', (req, res) => {
 
     userController.auth(req, res);
@@ -48,7 +48,7 @@ router.post('/auth', (req, res) => {
 // route search user by id - GET
 router.get('/:id', getToken, (req, res) => {
 
-    userController.userData(req, res);
+    userController.userData(res.token, req.params.id, res);
     
 })
 
@@ -68,7 +68,7 @@ router.post('/', (req, res) => {
 // route user update - PUT
 router.put('/:id', getToken, (req, res) => {
 
-    userController.update(req, res);
+    userController.update(res.token, req.params.id, req, res);
 
 })
 
@@ -78,10 +78,9 @@ router.put('/:id', getToken, (req, res) => {
 // route delete user - DELETE
 router.delete('/:id', getToken, (req, res) => {
 
-    userController.delete(req, res);
+    userController.delete(res.token, req.params.id, res);
 
 })
-
 
 
 module.exports = router;
