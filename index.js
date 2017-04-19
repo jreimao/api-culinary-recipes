@@ -24,7 +24,6 @@ var recipeRouter = require('./routes/recipeRouter');
 var userRouter = require('./routes/userRouter');
 
 
-
 // direcciona para .../api-culinary-recipes/v1
 // redirect to .../api-culinary-recipes/v1
 app.get('/', function(req, res) {
@@ -34,7 +33,6 @@ app.get('/api-culinary-recipes', function(req, res) {
     res.redirect('/api-culinary-recipes/v1');
 });
 
-
 // defenição rota '/api-culinary-recipes/v1'
 // route definition '/api-culinary-recipes/v1'
 app.get('/api-culinary-recipes/v1', function(req, res){
@@ -43,11 +41,15 @@ app.get('/api-culinary-recipes/v1', function(req, res){
     //return message with name api and version
     res.end(`Bem-vindo a API ${app.get('name-api')} versao ${app.get('versao-api')}`);
 });
+app.get('/', function(req, res){
+    res.end(`Bem-vindo a API ${app.get('name-api')} versao ${app.get('versao-api')}`);
+});
 
 
 // defenição rota '/api-culinary-recipes/v1/recipe'
 // route definition '/api-culinary-recipes/v1/recipe'
 app.use('/api-culinary-recipes/v1/recipe', recipeRouter);
+
 
 // defenição rota 'api-culinary-recipes/v1/user'
 // route definition 'api-culinary-recipes/v1/user'

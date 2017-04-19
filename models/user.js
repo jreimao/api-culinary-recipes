@@ -37,6 +37,10 @@ var UserSchema = new Schema({
 // nethod to encrypt password
 UserSchema.methods.encryptPass = (password) => {
 
+    // devolve uma senha encriptada - bcrypt.hashSync()
+    // contudo utiliza o metodo bcrypt.genSaltSync(9) - para 
+    // gerar senhas encriptadas unicas, evitando que duas senhas 
+    // iguais tenham a mesma encriptação
     return bcrypt.hashSync(password, bcrypt.genSaltSync(9));
 
 }
@@ -55,12 +59,12 @@ UserSchema.methods.validatePass = (young, old) => {
 
 // metodo gerar token
 // method to create token
-UserSchema.methods.createToken = (name, password) => {
+UserSchema.methods.createToken = (email, password) => {
 
     // devolve token
     // return token
     // 'secret'  ->  string - token
-    return jwt.sign({'name': name, 'password': password}, 'secret');
+    return jwt.sign({'email': email, 'password': password}, 'secret');
 
 }
 
