@@ -1,4 +1,7 @@
 
+###### [read this page in english](https://github.com/jreimao/api-culinary-recipes/readme-en.md)
+
+
 # sobre api-culinary-recipes
 
   > **api restful** mrc (model-route-controller) foi desenhada para gerir 'receitas de culinária' e os seus utilizadores; nesta primeira versão podemos consumir receitas sem estar autenticado, para as restantes funcionalidades será mesmo necessário fazer o registo
@@ -44,7 +47,7 @@
   http://localhost:3000/api-culinary-recipes/v1/
 
 
-#### acessos
+# acessos
 
   | métodos    | endereços | breve descrição |
   | ------     | ------    | ------          |
@@ -52,12 +55,12 @@
   | get        | .../api-culinary-recipes/v1/recipe/:id    | receita com id |
   | **post**   | **.../api-culinary-recipes/v1/recipe/**   | **inserir receita** |
   | **put**    | **.../api-culinary-recipes/v1/recipe/**   | **editar receita** |
-  | **delete** | **.../api-culinary-recipes/v1/recipe/**   | **eleminar receita** |
+  | **delete** | **.../api-culinary-recipes/v1/recipe/**   | **eliminar receita** |
   | **get**    | **.../api-culinary-recipes/v1/user/:id**  | **usuário com id** |
   | post       | .../api-culinary-recipes/v1/user/         | inserir usuário |
   | **post**   | **.../api-culinary-recipes/v1/user/auth** | **autenticar usuário** |
   | **put**    | **.../api-culinary-recipes/v1/user/**     | **editar usuário** |
-  | **delete** | **.../api-culinary-recipes/v1/user/**     | **eleminar usuário** |
+  | **delete** | **.../api-culinary-recipes/v1/user/**     | **eliminar usuário** |
 
   **a negrito todos os acessos que necessitam de autenticação**
 
@@ -103,6 +106,16 @@
     ]
 
 
-  #### licença
+
+  # licença
   MIT
   **aplicação gratuita**
+
+  
+
+  # autor
+
+  ![foto joão reimão](https://avatars2.githubusercontent.com/u/15116081?v=3&s=75 "joão reimão")
+  joão reimão
+  web and mobile programmer
+  email: jreimao@yahoo.com
