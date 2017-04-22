@@ -1,5 +1,5 @@
 
-###### [read this page in english](https://github.com/jreimao/api-culinary-recipes/readme-en.md)
+###### [read this page in english](https://github.com/jreimao/api-culinary-recipes/blob/master/README-en.md)
 
 
 # sobre api-culinary-recipes
@@ -116,6 +116,4 @@
   # autor
 
   ![foto joão reimão](https://avatars2.githubusercontent.com/u/15116081?v=3&s=75 "joão reimão")
-  joão reimão
-  web and mobile programmer
-  email: jreimao@yahoo.com
+  joão reimão | web and mobile programmer | email: jreimao@yahoo.com

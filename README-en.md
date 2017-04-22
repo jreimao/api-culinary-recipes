@@ -1,5 +1,5 @@
 
-###### [leia esta página em português](https://github.com/jreimao/api-culinary-recipes/readme.md)
+###### [leia esta página em português](https://github.com/jreimao/api-culinary-recipes)
 
 
 # about api-culinary-recipes
@@ -10,7 +10,7 @@
 
 
 
-# aome of the frameworks | libraries used
+# some of the frameworks | libraries used
 
   | name   | main features |
   | ------ | ------ |
@@ -55,7 +55,7 @@
   | methods    | url s | short description |
   | ------     | ----  | ------            |
   | get        | .../api-culinary-recipes/v1/recipe/       | list recipes |
-  | get        | .../api-culinary-recipes/v1/recipe/:id    | receita by id |
+  | get        | .../api-culinary-recipes/v1/recipe/:id    | recipe by id |
   | **post**   | **.../api-culinary-recipes/v1/recipe/**   | **insert recipe** |
   | **put**    | **.../api-culinary-recipes/v1/recipe/**   | **edit recipe** |
   | **delete** | **.../api-culinary-recipes/v1/recipe/**   | **delete recipe** |
@@ -121,6 +121,4 @@
   # author
 
   ![photo joão reimão](https://avatars2.githubusercontent.com/u/15116081?v=3&s=75 "joão reimão")
-  joão reimão
-  web and mobile programmer
-  email: jreimao@yahoo.com
+  joão reimão | web and mobile programmer | email: jreimao@yahoo.com
